@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+int max(int a, int b)
+{
+    if(a>=b)
+        return a;
+    else
+    return b;
+}
+
+int Rod_Cut(int price[], int m)
+{
+
+  int val[m+1];
+   val[0] = 0;
+   int i, j;
+
+
+   for (i = 1; i<=m; i++)
+   {
+       int max_val = -1;
+       for (j = 0; j < i; j++)
+        {
+            max_val = max(max_val, price[j] + val[i-j-1]);
+        }
+       val[i] = max_val;
+   }
+   return val[m];
+}
+
+int main()
+{
+    int p[10];
+    int n;
+    printf("how many sizes are available :");
+    scanf("%d",&n);
+    printf("enter prices :");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&p[i]);
+    }
+    int L ;
+    printf("enter rod length :");
+    scanf("%d",&L);
+    int result;
+    result = Rod_Cut(p,L);
+    printf("\nMaximum  Value is %d\n",result );
+    return 0;
+}
